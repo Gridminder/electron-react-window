@@ -1,0 +1,9 @@
+{
+  "name": "electron-react-window",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/electron-react-window/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project electron-react-window --web",
+  "targets": {}
+}

@@ -1,0 +1,1 @@
+export { setupWindowRouter } from './setupWindowRouter';

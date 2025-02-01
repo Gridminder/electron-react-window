@@ -1,0 +1,28 @@
+{
+  "name": "@gridminder/electron-react-window",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "preload": {
+      "import": "./preload/index.mjs",
+      "require": "./preload/index.js"
+    },
+    "renderer": {
+      "import": "./renderer/index.mjs",
+      "require": "./renderer/index.js"
+    },
+    "main": {
+      "import": "./main/index.mjs",
+      "require": "./main/index.js"
+    }
+  },
+  "dependencies": {
+    "@electron-toolkit/utils": "^3.0.0",
+    "use-deep-compare-effect": "^1.8.1"
+  },
+  "peerDependencies": {
+    "@electron-toolkit/preload": "^3.0.1",
+    "electron": "^31.0.2"
+  }
+}
