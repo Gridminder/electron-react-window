@@ -1,18 +1,21 @@
 {
   "name": "@gridminder/electron-react-window",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
-    "preload": {
+    "./preload": {
+      "types": "./preload/index.d.ts",
       "import": "./preload/index.mjs",
       "require": "./preload/index.js"
     },
-    "renderer": {
+    "./renderer": {
+      "types": "./renderer/index.d.ts",
       "import": "./renderer/index.mjs",
       "require": "./renderer/index.js"
     },
-    "main": {
+    "./main": {
+      "types": "./main/index.d.ts",
       "import": "./main/index.mjs",
       "require": "./main/index.js"
     }

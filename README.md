@@ -25,14 +25,24 @@ npm install @gridminder/electron-react-window
 The `WindowRenderer` component manages multiple Electron windows.
 
 ```jsx
-import { WindowRenderer, openWindow, closeWindow } from '@gridminder/electron-react-window';
+import {
+  WindowRenderer,
+  openWindow,
+  closeWindow,
+} from '@gridminder/electron-react-window/renderer';
 
 function App() {
   return (
     <SomeProviders>
       <WindowRenderer isMain>
         <h1>Main Window</h1>
-        <button onClick={() => openWindow('settings', { width: 200, height: 300, x: 20, y: 10 })}>Open Settings</button>
+        <button
+          onClick={() =>
+            openWindow('settings', { width: 200, height: 300, x: 20, y: 10 })
+          }
+        >
+          Open Settings
+        </button>
       </WindowRenderer>
 
       <WindowRenderer id="settings">

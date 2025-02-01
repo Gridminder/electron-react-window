@@ -1,4 +1,7 @@
-import { BrowserWindowConstructorOptions, IpcRendererEvent } from 'electron';
+import {
+  type BrowserWindowConstructorOptions,
+  type IpcRendererEvent,
+} from 'electron';
 import './ipcRoutes.d';
 
 export type PublicWindowConfig = Omit<

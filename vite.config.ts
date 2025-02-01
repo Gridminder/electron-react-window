@@ -5,6 +5,7 @@ import dts from 'vite-plugin-dts';
 import * as path from 'path';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import { builtinModules } from 'module';
 
 export default defineConfig({
   root: __dirname,
@@ -25,7 +26,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/libs/multi-window-renderer',
+    outDir: '../../dist/libs/electron-react-window',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
@@ -33,16 +34,29 @@ export default defineConfig({
     },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: {
+        renderer: 'src/renderer/index.ts',
+        main: 'src/main/index.ts',
+        preload: 'src/preload/index.ts',
+      },
       name: 'multi-window-renderer',
-      fileName: 'index',
+      fileName: (format, entryName) =>
+        `${entryName}/index.${format === 'es' ? 'mjs' : 'js'}`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
-      formats: ['es'],
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'electron',
+        '@electron-toolkit/util',
+        'use-deep-compare-effect',
+        ...builtinModules,
+      ],
     },
   },
   test: {
