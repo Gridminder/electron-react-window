@@ -17,6 +17,11 @@ type Windows = Record<
   }
 >;
 
+export type WindowHooksContext = {
+  id?: string;
+  windowConfig?: PublicWindowConfig;
+};
+
 export function setupWindowRouter({
   preload,
   mainWindow,
@@ -26,7 +31,7 @@ export function setupWindowRouter({
   preload: string;
   mainWindow: BrowserWindow;
   windows?: Windows;
-  setupWindowHooks?: (browserWindow: BrowserWindow) => unknown;
+  setupWindowHooks?: (browserWindow: BrowserWindow, context?: WindowHooksContext) => unknown;
 }) {
   const windowMap = new Map<string, BrowserWindow>();
   const windowConfigsFromRenderer = new Map<string, PublicWindowConfig>();
@@ -59,7 +64,10 @@ export function setupWindowRouter({
           ...constructorOptions?.webPreferences,
         },
       });
-      setupWindowHooks?.(newWindow);
+      setupWindowHooks?.(newWindow, {
+        id: arg.id,
+        windowConfig: windowConfigFromArg,
+      });
       windowConfig?.extraWindowHooks?.(newWindow);
       newWindow.on('ready-to-show', () => {
         newWindow.webContents.send(

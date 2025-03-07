@@ -48,3 +48,4 @@ vitest.config.*.timestamp*
 
 build
 out
+pnpm-lock.yaml

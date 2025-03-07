@@ -87,11 +87,13 @@ app.whenReady().then(() => {
   setupWindowRouter({
     preload: join(__dirname, '../preload/index.js'),
     mainWindow,
-    setupWindowHooks: (browserWindow) => {
+    setupWindowHooks: (browserWindow, context) => {
       browserWindow.webContents.setWindowOpenHandler((details) => {
         shell.openExternal(details.url);
         return { action: 'deny' };
       });
+
+      console.log(context); // To get the window config and id
 
       if (process.env['ELECTRON_RENDERER_URL']) {
         browserWindow.loadURL(process.env['ELECTRON_RENDERER_URL']);
